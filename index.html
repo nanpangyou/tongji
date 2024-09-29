@@ -1,213 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- 样式 -->
-    <link
-      href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- xlsx.js -->
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/lodash.js/4.17.21/lodash.min.js"></script>
-    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/dayjs/1.10.8/dayjs.min.js"></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="col-5 m-auto">
-      <span> 选择第1天原始表 </span>
-      <input type="file" id="getFileA" />
-    </div>
-    <hr />
-    <div class="col-5 m-auto">
-      <span> 选择第2天原始表 </span>
-      <input type="file" id="getFileB" />
-    </div>
-    <hr />
-    <div class="col-5 m-auto">
-      <span> 选择第3天原始表 </span>
-      <input type="file" id="getFileC" />
-    </div>
-    <hr />
-    <div class="col-5 m-auto">
-      <span> 选择第4天原始表 </span>
-      <input type="file" id="getFileD" />
-    </div>
-    <hr />
-    <div class="col-5 m-auto">
-      <span> 选择第5天原始表 </span>
-      <input type="file" id="getFileE" />
-    </div>
-    <hr />
-    <div class="col-5 m-auto">
-      <span> 选择第6天原始表 </span>
-      <input type="file" id="getFileF" />
-    </div>
-    <hr />
 
-    <button class="button" type="button" id="gen">生成</button>
-    <button id="export">导出</button>
-    <hr />
-    <table id="TableContainer" class="table table-bordered"></table>
-  </body>
-  <script>
-    const output = document.getElementById("TableContainer");
-    let totalList = [];
-    document
-      .getElementById("getFileA")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 样式 -->
+  <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/bootstrap/5.1.3/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <!-- xlsx.js -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/lodash.js/4.17.21/lodash.min.js"></script>
+  <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/dayjs/1.10.8/dayjs.min.js"></script>
+  <title>Document</title>
+</head>
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableA = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonA = XLSX.utils.sheet_to_json(tableA);
-        console.log("JSONA", jsonA);
-        if (jsonA) totalList.push(...jsonA);
-      });
-    document
-      .getElementById("getFileB")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+<body>
+  <div class="col-5 m-auto">
+    <span> 选择第1天原始表 </span>
+    <input type="file" id="getFileA" />
+  </div>
+  <hr />
+  <div class="col-5 m-auto">
+    <span> 选择第2天原始表 </span>
+    <input type="file" id="getFileB" />
+  </div>
+  <hr />
+  <div class="col-5 m-auto">
+    <span> 选择第3天原始表 </span>
+    <input type="file" id="getFileC" />
+  </div>
+  <hr />
+  <div class="col-5 m-auto">
+    <span> 选择第4天原始表 </span>
+    <input type="file" id="getFileD" />
+  </div>
+  <hr />
+  <div class="col-5 m-auto">
+    <span> 选择第5天原始表 </span>
+    <input type="file" id="getFileE" />
+  </div>
+  <hr />
+  <div class="col-5 m-auto">
+    <span> 选择第6天原始表 </span>
+    <input type="file" id="getFileF" />
+  </div>
+  <hr />
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableB = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonB = XLSX.utils.sheet_to_json(tableB);
-        console.log("JSONB", jsonB);
-        if (jsonB) totalList.push(...jsonB);
-      });
-    document
-      .getElementById("getFileC")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+  <button class="button" type="button" id="gen">生成</button>
+  <button id="export">导出</button>
+  <hr />
+  <table id="TableContainer" class="table table-bordered"></table>
+</body>
+<script>
+  const output = document.getElementById("TableContainer");
+  let totalList = [];
+  document
+    .getElementById("getFileA")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableC = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonC = XLSX.utils.sheet_to_json(tableC);
-        console.log("JSONC", jsonC);
-        if (jsonC) totalList.push(...jsonC);
-      });
-    document
-      .getElementById("getFileD")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableA = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonA = XLSX.utils.sheet_to_json(tableA);
+      console.log("JSONA", jsonA);
+      if (jsonA) totalList.push(...jsonA);
+    });
+  document
+    .getElementById("getFileB")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableD = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonD = XLSX.utils.sheet_to_json(tableD);
-        console.log("JSOND", jsonD);
-        if (jsonD) totalList.push(...jsonD);
-      });
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableB = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonB = XLSX.utils.sheet_to_json(tableB);
+      console.log("JSONB", jsonB);
+      if (jsonB) totalList.push(...jsonB);
+    });
+  document
+    .getElementById("getFileC")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-    document
-      .getElementById("getFileE")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableC = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonC = XLSX.utils.sheet_to_json(tableC);
+      console.log("JSONC", jsonC);
+      if (jsonC) totalList.push(...jsonC);
+    });
+  document
+    .getElementById("getFileD")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableE = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonE = XLSX.utils.sheet_to_json(tableE);
-        console.log("JSONE", jsonE);
-        if (jsonE) totalList.push(...jsonE);
-      });
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableD = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonD = XLSX.utils.sheet_to_json(tableD);
+      console.log("JSOND", jsonD);
+      if (jsonD) totalList.push(...jsonD);
+    });
 
-    document
-      .getElementById("getFileF")
-      .addEventListener("change", async (e) => {
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
+  document
+    .getElementById("getFileE")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-        /* parse and load first worksheet */
-        const wb = XLSX.read(data);
-        tableF = wb.Sheets[wb.SheetNames[0]];
-        // console.log(tableA);
-        jsonF = XLSX.utils.sheet_to_json(tableF);
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableE = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonE = XLSX.utils.sheet_to_json(tableE);
+      console.log("JSONE", jsonE);
+      if (jsonE) totalList.push(...jsonE);
+    });
 
-        console.log("JSONF", jsonF);
-        if (jsonF) totalList.push(...jsonF);
-      });
-    document.getElementById("gen").addEventListener("click", () => {
-      // 分组
+  document
+    .getElementById("getFileF")
+    .addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      const data = await file.arrayBuffer();
 
-      const arr = [];
-      for (i = 0; i < totalList.length; i++) {
-        const cities = arr.map((i) => i.city);
-        if (!cities.includes(totalList[i]["地址市"])) {
-          arr.push({
-            city: totalList[i]["地址市"],
-            sum: 1,
-            children: [{ subcity: totalList[i]["地址区"], sum: 1 }]
-          });
+      /* parse and load first worksheet */
+      const wb = XLSX.read(data);
+      tableF = wb.Sheets[wb.SheetNames[0]];
+      // console.log(tableA);
+      jsonF = XLSX.utils.sheet_to_json(tableF);
+
+      console.log("JSONF", jsonF);
+      if (jsonF) totalList.push(...jsonF);
+    });
+  document.getElementById("gen").addEventListener("click", () => {
+    // 分组
+
+    const arr = [];
+    for (i = 0; i < totalList.length; i++) {
+      const cities = arr.map((i) => i.city);
+      if (!cities.includes(totalList[i]["地址市"])) {
+        let sum = (totalList[i]["设备sn"]?.indexOf(',') > 0) ? totalList[i]["设备sn"].split(',').length : 1
+        arr.push({
+          city: totalList[i]["地址市"],
+          sum: sum,
+          children: [{
+            subcity: totalList[i]["地址区"],
+            sum: sum
+          }]
+        });
+      } else {
+        const currentCity = _.find(arr, { city: totalList[i]["地址市"] });
+        const subcities = currentCity.children.map((i) => i.subcity);
+        if (subcities.includes(totalList[i]["地址区"])) {
+          let sum = (totalList[i]["设备sn"]?.indexOf(',') > 0) ? totalList[i]["设备sn"].split(',').length : 1
+          _.find(currentCity.children, {
+            subcity: totalList[i]["地址区"]
+          }).sum += sum;
+          currentCity.sum += sum;
         } else {
-          const currentCity = _.find(arr, { city: totalList[i]["地址市"] });
-          const subcities = currentCity.children.map((i) => i.subcity);
-          if (subcities.includes(totalList[i]["地址区"])) {
-            _.find(currentCity.children, {
-              subcity: totalList[i]["地址区"]
-            }).sum += 1;
-            currentCity.sum += 1;
-          } else {
-            currentCity.children.push({
-              subcity: totalList[i]["地址区"],
-              sum: 1
-            });
-            currentCity.sum += 1;
-          }
+          let sum = (totalList[i]["设备sn"]?.indexOf(',') > 0) ? totalList[i]["设备sn"].split(',').length : 1
+          currentCity.children.push({
+            subcity: totalList[i]["地址区"],
+            sum: sum
+          });
+          currentCity.sum += sum;
         }
       }
-      console.log(12, arr);
-      //增加汇总
-      const countarr = [];
-      for (i = 0; i < arr.length; i++) {
-        countarr.push(arr[i]);
-        countarr.push({
-          city: `${arr[i].city}汇总`,
-          sum: arr[i].sum,
-          citysum: arr[i].sum,
-          subcity: ""
-        });
-      }
-      console.log(13, countarr);
-      // 使用函数
-      const flattenedData = flattenTree(countarr);
-      console.log(flattenedData);
-      let ws = XLSX.utils.json_to_sheet(flattenedData);
-      output.innerHTML = XLSX.utils.sheet_to_html(ws);
-    });
-    // 导出
-    document.getElementById("export").addEventListener("click", () => {
-      const wb = XLSX.utils.table_to_book(output);
-      XLSX.writeFile(wb, "SheetJSTable1.xlsx");
-    });
-
-    // 展开函数
-    function flattenTree(tree) {
-      return _.flatten(
-        tree.map((i) => {
-          return i.children
-            ? i.children.map((j) => ({
-                citysum: i.sum,
-                city: i.city,
-                ...j
-              }))
-            : { ...i };
-        })
-      );
     }
-  </script>
+    console.log(12, arr);
+    //增加汇总
+    const countarr = [];
+    for (i = 0; i < arr.length; i++) {
+      countarr.push(arr[i]);
+      countarr.push({
+        city: `${arr[i].city}汇总`,
+        sum: arr[i].sum,
+        citysum: arr[i].sum,
+        subcity: ""
+      });
+    }
+    console.log(13, countarr);
+    // 使用函数
+    const flattenedData = flattenTree(countarr);
+    console.log(flattenedData);
+    let ws = XLSX.utils.json_to_sheet(flattenedData);
+    output.innerHTML = XLSX.utils.sheet_to_html(ws);
+  });
+  // 导出
+  document.getElementById("export").addEventListener("click", () => {
+    const wb = XLSX.utils.table_to_book(output);
+    XLSX.writeFile(wb, "SheetJSTable1.xlsx");
+  });
+
+  // 展开函数
+  function flattenTree(tree) {
+    return _.flatten(
+      tree.map((i) => {
+        return i.children
+          ? i.children.map((j) => ({
+            citysum: i.sum,
+            city: i.city,
+            ...j
+          }))
+          : { ...i };
+      })
+    );
+  }
+</script>
+
 </html>
